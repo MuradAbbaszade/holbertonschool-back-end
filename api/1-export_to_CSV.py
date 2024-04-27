@@ -25,5 +25,8 @@ def main():
         )
         for task in todos:
             csv2.writerow(
-                [user["id"], user["username"], task["completed"], task["title"]]
+                [user["id"],
+                 user["username"],
+                 task["completed"],
+                 task["title"]]
             )
