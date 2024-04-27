@@ -16,14 +16,13 @@ if len(argv) == 2:
 
     user = requests.get(user_url).json()
     todo_tasks = requests.get(todo_url).json()
-    employee_tasks = []
+    employee_tasks = {f"{int(argv[1])}": []}
     for task in todo_tasks:
-        if task.get("userId") == int(argv[1]):
-            employee_tasks.append({
-                "task": task.get("title"),
-                "completed": task.get("completed"),
-                "username": task.get("username")
-            })
+        t = {}
+        t["task"] = task["title"]
+        t["completed"] = task["completed"]
+        t["username"] = user["username"]
+        employee_task[f"{int(argv[1])}"].append(t)
+
     with open('{}.json'.format(int(argv[1])), mode='w') as file:
         json.dump({int(argv[1]): employee_tasks}, file, indent=4)
-
