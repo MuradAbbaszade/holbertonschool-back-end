@@ -1,28 +1,20 @@
 #!/usr/bin/python3
-"""
-Gather data
-"""
+"""Gather data"""
+import json
 import requests
 from sys import argv
-import json
-
 
 if len(argv) == 2:
     url = "https://jsonplaceholder.typicode.com/"
-    user_url = "{}/users/{}".format(url, int(argv[1]))
-    todo_url = "{}/todos?userId={}".format(
-        url, int(argv[1])
-    )
-
-    user = requests.get(user_url).json()
-    todo_tasks = requests.get(todo_url).json()
-    employee_tasks = {f"{int(argv[1])}": []}
-    for task in todo_tasks:
+    result = {f"{argv[1]}": []}
+    todos = requests.get(f"{url}users/{argv[1]}/todos").json()
+    user = requests.get(f"{url}users/{argv[1]}").json()
+    for todo in todos:
         t = {}
-        t["task"] = task["title"]
-        t["completed"] = task["completed"]
+        t["task"] = todo["title"]
+        t["completed"] = todo["completed"]
         t["username"] = user["username"]
-        employee_task[f"{int(argv[1])}"].append(t)
+        result[f"{argv[1]}"].append(t)
 
-    with open('{}.json'.format(int(argv[1])), mode='w') as file:
-        json.dump({int(argv[1]): employee_tasks}, file, indent=4)
+    with open(f"{argv[1]}.json", "w") as f:
+        f.write(json.dumps(result))
