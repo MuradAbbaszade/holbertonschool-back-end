@@ -18,9 +18,9 @@ def main(id):
     user = requests.get(user_url).json()
     todo_tasks = requests.get(todo_url).json()
     username = user.get("name")
-    task_length = len(todos)
+    task_length = len(todo_tasks)
     completed_tasks = []
-    for task in todos:
+    for task in todo_tasks:
         if task.get("completed"):
             completed_tasks.append(task.get("title"))
     completed_tasks_length = len(completed_tasks)
