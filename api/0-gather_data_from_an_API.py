@@ -11,7 +11,9 @@ def main(id):
     Main function
     """
     user_url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
-    todo_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(id)
+    todo_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(
+        id
+    )
 
     user = requests.get(user_url).json()
     todo_tasks = requests.get(todo_url).json()
