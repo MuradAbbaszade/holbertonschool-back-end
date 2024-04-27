@@ -9,9 +9,9 @@ import json
 
 if len(argv) == 2:
     url = "https://jsonplaceholder.typicode.com/"
-    user_url = "{}/users/{}".format(url, id)
+    user_url = "{}/users/{}".format(url, int(argv[1]))
     todo_url = "{}/todos?userId={}".format(
-        url, id
+        url, int(argv[1])
     )
 
     user = requests.get(user_url).json()
